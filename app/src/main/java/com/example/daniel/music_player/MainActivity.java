@@ -40,14 +40,17 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        SongAdapter songAdt = new SongAdapter(this, songList);
+        songView.setAdapter(songAdt);
+
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void getSongList(){
         ContentResolver musicResolver = getContentResolver(); //grabs the music files from the device
         Uri musicUri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI; //grabs the actual music file info
-        Cursor musicCursor = musicResolver.query(musicUri, null, null, null);
-
+        //Line of code causing runtime issue
+        Cursor musicCursor = musicResolver.query(musicUri, null, null, null, null);
         if(musicCursor!=null && musicCursor.moveToFirst()){
             int titleColumn = musicCursor.getColumnIndex(MediaStore.Audio.Media.TITLE);
             int idColumn = musicCursor.getColumnIndex(MediaStore.Audio.Media._ID);
