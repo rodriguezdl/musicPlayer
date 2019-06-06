@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
         ContentResolver musicResolver = getContentResolver(); //grabs the music files from the device
         Uri musicUri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI; //grabs the actual music file info
         //Line of code causing runtime issue
-        Cursor musicCursor = musicResolver.query(musicUri, null, null, null, null);
+        Cursor musicCursor = musicResolver.query(musicUri, new String[]{MediaStore.Audio.Media.TITLE, MediaStore.Audio.Media.DATA}, null, null, null);
         if(musicCursor!=null && musicCursor.moveToFirst()){
             int titleColumn = musicCursor.getColumnIndex(MediaStore.Audio.Media.TITLE);
             int idColumn = musicCursor.getColumnIndex(MediaStore.Audio.Media._ID);
